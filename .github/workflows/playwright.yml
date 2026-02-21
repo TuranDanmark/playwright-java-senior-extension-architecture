@@ -1,3 +1,4 @@
+
 name: Playwright Matrix CI
 
 on:
@@ -23,6 +24,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Build Docker Image
+        run: docker build -t playwright-tests .
+
+      - name: Run Tests in Docker
+        run: docker run playwright-tests
+
       # Java setup with cache
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -39,7 +46,6 @@ jobs:
           key: playwright-${{ runner.os }}
           restore-keys: |
             playwright-${{ runner.os }}
-
       # Install browsers + deps
       - name: Install Playwright Browsers
         run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install chromium firefox webkit --force"
@@ -51,7 +57,6 @@ jobs:
           -Dbrowser=${{ matrix.browser }} \
           -Dheadless=true \
           -DretryCount=1
-
         # Upload allure results
       - name: Upload Allure Results
         if: always()
@@ -82,13 +87,8 @@ jobs:
           
       # Generate report
       - name: Generate Allure Report
-        uses: simple-elf/allure-report-action@v1.7
-        with:
-          allure_results: merged-results
-          allure_report: allure-report
-          gh_pages: gh-pages
-          keep_reports: 20
-
+        run: mvn allure:report
+        
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
@@ -97,3 +97,4 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-report
           force_orphan: true
+          user_name: github_actions
