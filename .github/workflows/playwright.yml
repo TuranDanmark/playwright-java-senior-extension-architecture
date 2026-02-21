@@ -23,12 +23,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build Docker Image
-        run: docker build -t playwright-tests .
-
-      - name: Run Tests in Docker
-        run: docker run playwright-tests
-
       # Java setup with cache
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -94,7 +88,7 @@ jobs:
           allure_report: allure-report
           gh_pages: gh-pages
           keep_reports: 20
-                  
+
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
