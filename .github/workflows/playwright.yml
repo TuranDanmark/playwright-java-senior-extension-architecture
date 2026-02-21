@@ -1,4 +1,3 @@
-
 name: Playwright Matrix CI
 
 on:
@@ -97,4 +96,3 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-report
           force_orphan: true
-          user_name: github_actions
