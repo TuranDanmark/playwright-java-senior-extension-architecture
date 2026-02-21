@@ -78,7 +78,7 @@ jobs:
       - name: Download Allure Results
         uses: actions/download-artifact@v4
         with:
-          path: allure-results
+          path: allure-results-temp
 
       # Merge results
       - name: Merge Allure Results
