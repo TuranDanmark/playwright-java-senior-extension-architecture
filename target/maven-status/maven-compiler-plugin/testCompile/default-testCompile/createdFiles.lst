@@ -1,0 +1,12 @@
+com\elvira\core\allure\AllureAttachmentService.class
+com\elvira\core\config\Environment.class
+com\elvira\core\browser\BrowserSession.class
+com\elvira\core\extension\PlaywrightExtension.class
+com\elvira\tests\TodoTest.class
+com\elvira\pages\TodoPage.class
+com\elvira\core\browser\BrowserTypeResolver.class
+com\elvira\core\config\ConfigLoader.class
+com\elvira\core\base\BaseTest.class
+com\elvira\core\config\FrameworkConfig.class
+com\elvira\core\browser\PlaywrightManager.class
+com\elvira\core\allure\AllureEnvironmentWriter.class
