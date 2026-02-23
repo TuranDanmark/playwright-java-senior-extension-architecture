@@ -69,8 +69,6 @@ jobs:
   report:
     needs: test
     runs-on: ubuntu-latest
-    container:
-        image: mcr.microsoft.com/playwright/java:v1.42.0-jammy
 
     steps:
       - name: Checkout repository
@@ -96,5 +94,7 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: ./target/site/allure-maven-plugin
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./target/site/allure-maven-plugin
+          force_orphan: true
