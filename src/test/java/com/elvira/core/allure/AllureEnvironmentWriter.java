@@ -1,30 +1,29 @@
 package com.elvira.core.allure;
 
+import com.elvira.core.config.Environment;
+
 import java.io.File;
 import java.io.PrintWriter;
 
 public class AllureEnvironmentWriter {
 
     public static void write() {
-    try {
-        File resultsDir = new File("target/allure-results");
-        if (!resultsDir.exists()) {
-            resultsDir.mkdirs();
-        }
 
-        File envFile = new File(resultsDir, "environment.properties");
+        try {
 
-        try (PrintWriter writer = new PrintWriter(envFile)) {
-            writer.println("Browser=Chromium");
-            writer.println("Headless=" + System.getProperty("headless", "false"));
-            writer.println("OS=" + System.getProperty("os.name"));
-            writer.println("Java=" + System.getProperty("java.version"));
-            writer.println("Environment=" + System.getProperty("env", "local"));
-        }
+            File dir = new File("target/allure-results");
+            dir.mkdirs();
 
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-    
+            File file = new File(dir, "environment.properties");
+
+            try (PrintWriter writer = new PrintWriter(file)) {
+                writer.println("Browser=" + System.getProperty("browser", "chromium"));
+                writer.println("Headless=" + System.getProperty("headless", "true"));
+                writer.println("Environment=" + Environment.current().name());
+                writer.println("OS=" + System.getProperty("os.name"));
+                writer.println("Java=" + System.getProperty("java.version"));
+            }
+
+        } catch (Exception ignored) {}
     }
 }
