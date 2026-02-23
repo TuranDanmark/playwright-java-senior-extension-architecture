@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 
 public class AllureEnvironmentWriter {
 
-    static void writeEnvironmentInfo() {
+    public static void write() {
     try {
         File resultsDir = new File("target/allure-results");
         if (!resultsDir.exists()) {
